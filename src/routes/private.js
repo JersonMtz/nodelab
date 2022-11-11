@@ -1,15 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const private = require('../controllers/privateController');
+const PrivateController = require('../controllers/privateController');
 
-router.get('/dashboard', private.HomePage);
+router.get('/dashboard', PrivateController.HomePage);
 
-router.get('/dashboard/profile', private.ProfilePage);
 
-router.get('/dashboard/change-password', private.ChangePasswordPage);
+// VIEW PAGES PROFILE
+router.get('/dashboard/profile', PrivateController.ProfilePage);
 
-router.get('/dashboard/list-users', private.ListUsersPage);
+router.get('/dashboard/profile/change-password', PrivateController.ChangePasswordPage);
 
-router.get('/dashboard/add-user', private.AddUserPage);
+
+// VIEWS PAGES USERS
+router.get('/dashboard/user/list', PrivateController.ListUsersPage);
+
+router.get('/dashboard/user/add', PrivateController.AddUserPage);
 
 module.exports = router;

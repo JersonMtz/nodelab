@@ -1,14 +1,32 @@
-const Create = (req, res) => {
-    
-    const data = req.body;
-    
-    console.log(data);
-    
-    // usar procedimiento almacenado
-    res.json({
-        ok: true,
-        msg: 'Usuario registrado con éxito'
-    })
+const User = require('../models/User'); 
+
+const Create = async (req, res) => { 
+    try {
+        const data = req.body;
+        const user = new User({
+            firstName: data.firstname,
+            lastName: data.lastname,
+            email: data.email,
+            pwd: data.password
+        });
+        const result = await user.save();
+        if(!result.ok) {
+            return res.status(400)
+                .json({
+                    ...result
+                });
+        }
+
+        res.status(201)
+            .json({ ...result })
+
+    } catch (err) {
+        return res.status(500)
+            .json({
+                ok: false,
+                msg: err
+            });
+    }
 }
 
 const Update = (req, res) => {

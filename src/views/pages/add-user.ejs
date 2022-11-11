@@ -97,9 +97,11 @@
                                 body: JSON.stringify(data),
                             })
                             .then((response) => response.json())
-                            .then(({ msg }) => {
+                            .then(({ ok, msg }) => {
                                 alert(msg);
-                                window.location.reload();
+                                if (ok) {
+                                    window.location.reload();
+                                }
                             })
                             .catch((error) => {
                                 console.error('Error:', error);

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const public = require('../controllers/publicController');
+const PublicController = require('../controllers/publicController');
 
-router.get('/contact', public.ContactPage);
+router.get('/contact', PublicController.ContactPage);
 
 module.exports = router;
