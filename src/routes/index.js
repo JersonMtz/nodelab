@@ -8,7 +8,6 @@ router.get('/', (req, res)=> {
 
 router.use(require('./public'));
 router.use(require('./private'));
-router.use(require('./auth'));
 
 router.use(require('./user'));
 
