@@ -1,22 +1,9 @@
-// const connection = new (require('rest-mssql-nodejs'))({
-//     user: '',
-//     password: '',
-//     server: 'localhost',
-//     database: 'web2',
-//     port: 1433, 
-//     options: { 
-//         encrypt: true
-//     } 
-// });
-
-// "sqlsrv:server = tcp:labnode.database.windows.net,1433; Database = web2", "usernode", "{your_password_here}"
-
 const config = {
-    user: 'usernode',
-    password: 'Abcd1234',
-    server: 'labnode.database.windows.net', 
-    database: 'web2',
-    port: 1433
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    server: process.env.DB_SERVER, 
+    database: process.env.DB_NAME,
+    port: Number(process.env.DB_PORT)
 }
 
 module.exports = config;

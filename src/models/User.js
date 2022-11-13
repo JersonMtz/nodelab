@@ -32,8 +32,7 @@ class User {
                 ok: false,
                 msg: 'Faltan campos requeridos'
             }
-        } catch (error) {
-            console.log(err);
+        } catch (_) {
             throw 'Ha ocurrido un error al registrar';
         }
     }
