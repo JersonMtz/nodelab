@@ -8,17 +8,26 @@ class User {
         this.email = email;
         this.pwd = pwd;
     }
+    
+   
+    constructor({ IdUser,firstName, lastName, email, pwd }) {
+        this.idUser=idUser;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.pwd = pwd;
+    }
 
     async save() {
         try {
-            if (this.firstName != '' && this.lastName != '' 
-            && this.email != '' && this.pwd != '') {
+            if (this.firstName != '' && this.lastName != ''
+                && this.email != '' && this.pwd != '') {
                 await pool.connect();
                 const statement = await pool.request()
-                .input('FirstName', this.firstName)
-                .input('LastName', this.lastName)
-                .input('Email', this.email)
-                .input('Pwd', this.pwd);
+                    .input('FirstName', this.firstName)
+                    .input('LastName', this.lastName)
+                    .input('Email', this.email)
+                    .input('Pwd', this.pwd);
                 await statement.execute('UserRegister');
                 await pool.close();
 
@@ -37,13 +46,13 @@ class User {
         }
     }
 
-    static async list(){
+    static async list() {
         try {
             await pool.connect();
             const statement = await pool.request();
             const { recordset: users } = await statement.execute('UserList');
             await pool.close();
-            
+
             return {
                 ok: true,
                 users
@@ -53,10 +62,56 @@ class User {
         }
     }
 
-    static async delete(IdUser){
+    static async delete(IdUser) {
         try {
-            
+
             // eliminar de bd con procedimiento
+
+            await pool.connect();
+            const statement = await pool.request()
+             .input(IdUser)
+             
+            await statement.execute('UserDelete');
+            await pool.close();
+
+            return {
+                ok: true,
+                msg: 'Usuario eliminado con éxito'
+            }
+
+
+
+        } catch (error) {
+            throw ({
+                ok: false,
+                msg: error
+            });
+        }
+    }
+
+   
+    async Update(){
+        try {
+
+            // actualizar de bd con procedimiento
+
+            await pool.connect();
+            const statement = await pool.request()
+            .input('IdUser'=this.idUser)
+            .input('FirstName', this.firstName)
+            .input('LastName', this.lastName)
+            .input('Email', this.email)
+            .input('Pwd', this.pwd);
+            await statement.execute('UserUpdate');
+            
+            await pool.close();
+
+            return {
+                ok: true,
+                msg: 'Usuario actualizado con éxito'
+            }
+
+
 
         } catch (error) {
             throw ({
