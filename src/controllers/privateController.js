@@ -10,22 +10,9 @@ const ProfilePage = (req, res) => {
     res.render('pages/profile');
 }
 
-const ListUsersPage = (req, res) => {
+const ListUsersPage = async (req, res) => {
 
     // usar procedimiento
-    const users = [
-        {
-            id: 1,
-            fullName: 'Pepe BD',
-            email: 'pepe@mail.com'
-        },
-        {
-            id: 2,
-            fullName: 'Marta Cs',
-            email: 'csmar@mail.com'
-        }
-    ]
-
     res.render('pages/list-users', { users });
 }
 
