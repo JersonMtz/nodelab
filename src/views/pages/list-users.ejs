@@ -16,6 +16,9 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <h3 class="h3 mb-4 text-gray-800">Sección de Administración de Usuarios</h3>
+                    <% if (hasError) { %>
+                       <h5 class="text-danger text-center"><%= msg %></h5>
+                    <% } else { %>
                     <table class="table">
                         <thead>
                             <tr>
@@ -28,9 +31,9 @@
                         <tbody>
                             <% users.forEach(function(user){ %>
                             <tr>
-                                <th><%= user.id %> </th>
-                                <td><%= user.fullName %> </td>
-                                <td><%= user.email %> </td>
+                                <th><%= user.ID %> </th>
+                                <td><%= user.FullName %> </td>
+                                <td><%= user.Email %> </td>
                                 </td>
                                 <td>
                                     <div class="text-center">
@@ -54,6 +57,7 @@
                         <% }); %>
                         </tbody>
                     </table>
+                    <% } %>
                 </div>
                 <!-- /.container-fluid -->
 

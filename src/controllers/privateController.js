@@ -1,3 +1,5 @@
+const User = require('../models/User');
+
 const HomePage = (req, res) => {
     res.render('pages/home');
 }
@@ -11,9 +13,12 @@ const ProfilePage = (req, res) => {
 }
 
 const ListUsersPage = async (req, res) => {
-
-    // usar procedimiento
-    res.render('pages/list-users', { users });
+    try {
+        const { users } = await User.list();
+        res.render('pages/list-users', { hasError: false, users });
+    } catch(msg) {
+        res.render('pages/list-users', { hasError: true, msg });
+    }
 }
 
 const AddUserPage = (req, res) => {

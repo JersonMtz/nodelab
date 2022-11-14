@@ -32,9 +32,37 @@ class User {
                 ok: false,
                 msg: 'Faltan campos requeridos'
             }
-        } catch (error) {
-            console.log(err);
+        } catch (_) {
             throw 'Ha ocurrido un error al registrar';
+        }
+    }
+
+    static async list(){
+        try {
+            await pool.connect();
+            const statement = await pool.request();
+            const { recordset: users } = await statement.execute('UserList');
+            await pool.close();
+            
+            return {
+                ok: true,
+                users
+            }
+        } catch (_) {
+            throw 'Ha ocurrido un error al listar usuarios';
+        }
+    }
+
+    static async delete(IdUser){
+        try {
+            
+            // eliminar de bd con procedimiento
+
+        } catch (error) {
+            throw ({
+                ok: false,
+                msg: error
+            });
         }
     }
 }
