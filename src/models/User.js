@@ -9,9 +9,9 @@ class User {
         this.pwd = pwd;
     }
     
-   
-    constructor({ IdUser,firstName, lastName, email, pwd }) {
-        this.idUser=idUser;
+
+    constructor({ IdUser, firstName, lastName, email, pwd }) {
+        this.idUser = IdUser;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -69,8 +69,8 @@ class User {
 
             await pool.connect();
             const statement = await pool.request()
-             .input(IdUser)
-             
+            .input(IdUser)
+            
             await statement.execute('UserDelete');
             await pool.close();
 
@@ -89,7 +89,7 @@ class User {
         }
     }
 
-   
+
     async Update(){
         try {
 
